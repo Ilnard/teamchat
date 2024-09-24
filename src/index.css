@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--bg-body);
+}
+button {
+    background-color: transparent;
+    border: none;
+}
+.interface-component {
+    background-color: var(--bg-interface-component);
+    border-radius: var(--border-radius-interface-component);
+    padding: var(--padding-interface-component);
+}
+.logo path {
+    fill: var(--color-accent);
+}
+.logo path:last-child {
+    fill: var(--color-default);
+}

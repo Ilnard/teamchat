@@ -1,0 +1,21 @@
+:root {
+    /* colors */
+    --bg-body: #EAEAEA;
+    --bg-interface-component: white;
+    --bg-default: #D9D9D9;
+    --color-default: black;
+    --color-text-default: black;
+    --color-text-alternative: white;
+    --color-text-secondary: #ADADAD;
+    --color-accent: #4E5FFF;
+    --bg-hover-el: #f3f3f3;
+    --bg-active-el: #e6e6e6;
+
+
+    /* interface components */
+    --border-radius-interface-component: 15px;
+    --padding-interface-component: 10px;
+
+    /* general */
+    --border-radius: 15px;
+}

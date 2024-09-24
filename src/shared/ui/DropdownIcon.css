@@ -1,0 +1,6 @@
+.dropdown-icon {
+    transition: transform .2s;
+}
+.dropdown-icon_active {
+    transform: rotate(180deg);
+}

@@ -1,0 +1,14 @@
+.mini-profile-button {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: var(--border-radius);
+    transition: background-color .2s;
+}
+.mini-profile-button:hover {
+    cursor: pointer;
+    background-color: var(--bg-hover-el);
+}
+.mini-profile-button:active {
+    background-color: var(--bg-active-el);
+}
