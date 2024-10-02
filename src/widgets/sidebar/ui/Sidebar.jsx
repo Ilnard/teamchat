@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import {NavLink} from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 // import React from 'react'
 
@@ -14,10 +14,7 @@ const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItem
             <li key={item.id}>
                 <NavLink
                     to={item.path}
-                    className={({
-                                    isPending,
-                                    isActive
-                                }) => isPending ? 'nav-link_pending' : isActive ? 'nav-link_active' : ''}
+                    className={({ isPending, isActive }) => isPending ? 'nav-link_pending' : isActive ? 'nav-link_active' : ''}
                 >
                     <NavItemComponent chatsItemData={item}/>
                 </NavLink>
@@ -26,15 +23,13 @@ const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItem
     })
 
     return (
-        <div className="sidebar-wrapper">
-            <div className='interface-component sidebar'>
-                <nav>
-                    <ul
-                        className='sidebar-list'
-                        style={{rowGap: navItemsSpace + 'px'}}
-                    >{navLinks}</ul>
-                </nav>
-            </div>
+        <div className='interface-component'>
+            <nav>
+                <ul
+                    className='sidebar-list'
+                    style={{rowGap: navItemsSpace + 'px'}}
+                >{navLinks}</ul>
+            </nav>
         </div>
     )
 }

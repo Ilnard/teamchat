@@ -1,5 +1,5 @@
 .messenger {
     display: grid;
-    grid-template-columns: 260px 2.5fr;
+    grid-template-columns: 1fr 2.5fr;
     column-gap: 10px;
 }

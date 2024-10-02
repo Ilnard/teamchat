@@ -1,22 +1,21 @@
 const chatsData = () => {
     // Временно fakeData
-    return [
+    const data = [
         {
-            get path() {
-                return '/chat/' + this.user.id
-            },
+            id: 1,
+            get path() { return '/chats/' + this.id },
             user: {
                 id: 24,
                 name: 'Владимир',
                 surname: 'Централ',
-                avatarUrl: 'https://dreamrider.ru/wp-content/uploads/2023/01/8v1z7d_t20_yx6vkm-scaled.jpg'
+                avatarUrl: ''
             },
             lastMessage: {
                 from_id: 15,
                 to_id: 24,
                 message: {
                     id: 7893,
-                    value: 'Привет, как дела? У меня все хорошо, я очень рад, я наконец-то',
+                    value: 'Привет, как дела?',
                     replied: {},
                     createdAt: '2024-08-24 16:37',
                     updatedAt: '2024-08-24 16:37',
@@ -24,9 +23,8 @@ const chatsData = () => {
             }
         },
         {
-            get path() {
-                return '/chat/' + this.user.id
-            },
+            id: 2,
+            get path() { return '/chats/' + this.id },
             user: {
                 id: 25,
                 name: 'Елена',
@@ -46,6 +44,8 @@ const chatsData = () => {
             }
         }
     ]
+
+    return data
 }
 
 const dataFromServer = chatsData()

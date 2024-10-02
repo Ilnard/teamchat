@@ -13,7 +13,7 @@ const ChatsItem = ({chatsItemData = {}}) => {
             return <span className='chats-item__me'>Вы:</span>
         }
         else {
-            return null
+            return
         }
     }
 
@@ -22,7 +22,7 @@ const ChatsItem = ({chatsItemData = {}}) => {
             <Avatar 
                 userName={chatsItemData.user.name}
                 userSurname={chatsItemData.user.surname}
-                imageURL={chatsItemData.user.avatarUrl}
+                imageURL={''}
                 imageWidthSize={48}
             />
             <div className="chats-item__info">

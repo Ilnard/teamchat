@@ -1,5 +1,0 @@
-.chat {
-    display: grid;
-    grid-template-rows: 70px 1fr 70px;
-    row-gap: 10px;
-}
