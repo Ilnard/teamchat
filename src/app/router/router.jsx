@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 
 import App from 'app/App'
 import Messenger from 'pages/messenger'
+import Chat from 'widgets/chat'
 
 const routes = [
     {
@@ -10,7 +11,13 @@ const routes = [
         children: [
             {
                 path: '',
-                element: <Messenger/>
+                element: <Messenger/>,
+                children: [
+                    {
+                        path: 'chat/:id',
+                        element: <Chat/>,
+                    }
+                ]
             }
         ]
     }

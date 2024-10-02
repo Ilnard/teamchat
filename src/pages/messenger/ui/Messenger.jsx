@@ -10,14 +10,8 @@ const Messenger = () => {
 
     return (
         <div className='messenger'>
-            <div className='interface-component'>
-                <Sidebar navItemComponent={ChatsItem} navItemsData={chatsData}/>
-            </div>
-            <div className='interface-component'>
-                <Chat/>
-            </div>
-            
-
+            <Sidebar navItemComponent={ChatsItem} navItemsData={chatsData}/>
+            <Chat/>
         </div>
         // <div className="interface-component">
         //     messenger content
