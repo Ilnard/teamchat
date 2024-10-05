@@ -8,6 +8,8 @@
     --color-text-alternative: white;
     --color-text-secondary: #ADADAD;
     --color-accent: #4E5FFF;
+    --color-accent-hover: #3142fd;
+    --color-accent-active: #2537fd;
     --bg-hover-el: #f3f3f3;
     --bg-active-el: #e6e6e6;
 
@@ -17,4 +19,7 @@
 
     /* general */
     --border-radius: 15px;
+
+    /* input */
+    --color-border: #EAEAEA;
 }

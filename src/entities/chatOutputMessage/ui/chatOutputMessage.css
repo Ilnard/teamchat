@@ -1,0 +1,32 @@
+.message-wrapper {
+    display: flex;
+}
+.message-wrapper-from {
+    justify-content: flex-end;
+}
+.message {
+    display: flex;
+    align-items: flex-end;
+}
+.message-wrapper-from > .message {
+    flex-direction: row-reverse;
+}
+.message-wrapper > .message > .message__message-wrapper {
+    border-radius: 10px;
+    background-color: var(--bg-default);
+}
+.message-wrapper-from > .message > .message__message-wrapper {
+    background-color: var(--color-accent);
+}
+.message__message {
+    padding: 8px;
+}
+.message-wrapper-from > .message > .message__message-wrapper > .message__message {
+    color: var(--color-text-alternative)
+}
+.message__time {
+    width: 40px;
+    padding: 5px;
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}

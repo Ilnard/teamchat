@@ -1,24 +1,30 @@
 import {useParams} from "react-router-dom"
-import {useGetChatQuery} from "shared/api/getChatsDataAPI";
+import {useGetChatQuery} from 'shared/api/chatsAPI'
 
-import ChatUser from 'entities/chatUser/';
+import ChatUser from 'entities/chatUser'
+import ChatOutput from 'features/chatOutput'
+import ChatInput from "features/chatInput"
 
 import './Chat.css'
 
 const Chat = () => {
-    let chatUserId = useParams().id
+    let chatUserId = Number(useParams().id)
     let user = {
+        id: null,
         name: null,
         surname: null,
         avatarUrl: null,
         imageWidthSize: 48
     }
+    let messages = []
 
     if (!chatUserId) {
         chatUserId = null
     }
-    const { data } = useGetChatQuery(chatUserId)
+    const { data } = useGetChatQuery({fromUserId: 15, toUserId: chatUserId})
     if (data && 'user' in data) user = data.user
+    if (data && 'messages' in data) messages = data.messages
+
     return (
         <div className="chat">
             <ChatUser
@@ -27,12 +33,8 @@ const Chat = () => {
                 imageURL={user.avatarUrl}
                 imageWidthSize={48}
             />
-            <div className="interface-component">
-                messages
-            </div>
-            <div className="interface-component">
-                input message
-            </div>
+            <ChatOutput messagesData={messages} />
+            <ChatInput toUserId={chatUserId}/>
         </div>
     )
 }
