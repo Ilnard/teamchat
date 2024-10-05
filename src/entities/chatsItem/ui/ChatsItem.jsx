@@ -4,22 +4,41 @@ import Avatar from 'entities/avatar'
 
 import './ChatsItem.css'
 
-const ChatsItem = ({chatsItemData = {}}) => {
+const ChatsItem = ({
+                       chatsItemData = {
+                           user: {
+                               id: null,
+                               name: null,
+                               surname: null,
+                               avatarUrl: null
+                           },
+                           lastMessage: {
+                               from_user_id: null,
+                               to_user_id: null,
+                               message: {
+                                   id: null,
+                                   value: null,
+                                   replied: null,
+                                   createdAt: null,
+                                   updatedAt: null,
+                               }
+                           }
+                       }
+                   }) => {
 
     if (!chatsItemData) throw new Error("navItems is undefined")
 
     const prefixMe = () => {
-        if (chatsItemData.lastMessage.from_id === 15) {
+        if (chatsItemData.lastMessage.from_user_id === 15) {
             return <span className='chats-item__me'>Вы:</span>
-        }
-        else {
+        } else {
             return null
         }
     }
 
     return (
-        <div className="chats-item" >
-            <Avatar 
+        <div className="chats-item">
+            <Avatar
                 userName={chatsItemData.user.name}
                 userSurname={chatsItemData.user.surname}
                 imageURL={chatsItemData.user.avatarUrl}

@@ -1,15 +1,17 @@
 import Sidebar from 'widgets/sidebar'
 import Chat from 'widgets/chat'
 import ChatsItem from 'entities/chatsItem'
-import chatsData from '../api/getUsersChats'
+import { useGetChatsQuery } from 'shared/api/getChatsDataAPI.js'
 
 import './Messenger.css'
 
 const Messenger = () => {
 
+    const { data } = useGetChatsQuery()
+
     return (
         <div className='messenger'>
-            <Sidebar navItemComponent={ChatsItem} navItemsData={chatsData}/>
+            <Sidebar navItemComponent={ChatsItem} navItemsData={data}/>
             <Chat/>
         </div>
     )

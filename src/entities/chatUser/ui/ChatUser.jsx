@@ -1,7 +1,9 @@
 import Avatar from 'entities/avatar'
 import PropTypes from "prop-types";
 
-const ChatUser = ({userName, userSurname, imageURL, imageAlt, imageWidthSize}) => {
+import './ChatUser.css'
+
+const ChatUser = ({userName, userSurname, imageURL, imageWidthSize}) => {
 
     return (
         <div className="interface-component chat-user">
@@ -9,7 +11,6 @@ const ChatUser = ({userName, userSurname, imageURL, imageAlt, imageWidthSize}) =
                 userName={userName}
                 userSurname={userSurname}
                 imageURL={imageURL}
-                imageAlt={imageAlt}
                 imageWidthSize={imageWidthSize}
             />
             <div className="chat-user__fullname">{ userName } { userSurname }</div>
