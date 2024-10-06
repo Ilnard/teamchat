@@ -8,6 +8,11 @@ export const chatsAPI = createApi({
     endpoints: (builder) => ({
         getChats: builder.query({
             query: () => 'get-chats-data',
+            async onCacheEntryAdded(arg, { cacheDataLoaded, updateCachedData }) {
+                const cache = await cacheDataLoaded
+                const messages = cache.data
+                console.log('cache: ', messages)
+            }
         }),
         getChat: builder.query({
             query: ({fromUserId, toUserId}) => `get-chat-data/${fromUserId}/${toUserId}`,
