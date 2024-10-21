@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types'
 
 import Avatar from 'entities/avatar'
+import {useGetLastMessageQuery} from "shared/api/chatsAPI"
+import {useSelector} from "react-redux"
 
 import './ChatsItem.css'
 
@@ -11,32 +13,28 @@ const ChatsItem = ({
                                name: null,
                                surname: null,
                                avatarUrl: null
-                           },
-                           messages: [
-                               {
-                                   id: null,
-                                   from_user_id: null,
-                                   to_user_id: null,
-                                   createdAt: null,
-                                   updatedAt: null,
-                                   message: null
-                               }
-                           ]
+                           }
                        }
                    }) => {
 
     if (!chatsItemData) throw new Error("navItems is undefined")
 
-    const correctMessageOutput = () => {
-        if (chatsItemData.messages[0].from_user_id === 15) {
+    const currentUser = useSelector(state => state.currentUser)
+
+    const {data} = useGetLastMessageQuery({fromUserId: currentUser.id, toUserId: chatsItemData.user.id})
+    const message = data && data['data'] ? data.data : { id: null, fromUserId: null, toUserId: null, message: null }
+
+    const correctMessageOutput = (message) => {
+        if (!message.fromUserId) return
+        if (message.fromUserId === currentUser.id) {
             return (
                 <>
                     <span className='chats-item__me'>Вы: </span>
-                    {chatsItemData.messages[0].message}
+                    {message.message}
                 </>
             )
         } else {
-            return chatsItemData.messages[0].message
+            return message.message
         }
     }
 
@@ -50,7 +48,7 @@ const ChatsItem = ({
             />
             <div className="chats-item__info">
                 <p className="chats-item__username">{chatsItemData.user.name} {chatsItemData.user.surname}</p>
-                <p className="chats-item__message">{correctMessageOutput()}</p>
+                <p className="chats-item__message">{correctMessageOutput(message)}</p>
             </div>
         </div>
     )

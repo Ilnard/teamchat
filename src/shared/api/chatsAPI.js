@@ -1,25 +1,61 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react"
+import {socket} from "shared/api/socket"
 
-export const chatsAPI = createApi({
-    reducerPath: 'chatsAPI',
+export const apiChats = createApi({
+    reducerPath: 'apiChats',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://127.0.0.1:3000/api/'
+        baseUrl: '/server/api'
     }),
     endpoints: (builder) => ({
         getChats: builder.query({
-            query: () => 'get-chats-data',
-            async onCacheEntryAdded(arg, { cacheDataLoaded, updateCachedData }) {
-                const cache = await cacheDataLoaded
-                const messages = cache.data
-                console.log('cache: ', messages)
-            }
+            query: () => '/get-chats-data'
         }),
         getChat: builder.query({
-            query: ({fromUserId, toUserId}) => `get-chat-data/${fromUserId}/${toUserId}`,
+            query: ({fromUserId, toUserId}) => `/get-chat-data/${fromUserId}/${toUserId}`,
+            async onCacheEntryAdded(arg, {updateCachedData, cacheDataLoaded, cacheEntryRemoved}) {
+
+                await cacheDataLoaded
+
+                socket.on('add message', message => {
+                    updateCachedData(draft => {
+                        const messagesCount = draft.data.messages.length
+                        const lastMessageId = draft.data.messages[messagesCount - 1] ? draft.data.messages[messagesCount - 1].id : -1
+                        draft.data.messages.push({
+                            id: lastMessageId + 1,
+                            fromUserId: arg.toUserId,
+                            toUserId: arg.fromUserId,
+                            createdAt: new Date().toUTCString(),
+                            updatedAt: new Date().toUTCString(),
+                            message: message.message
+                        })
+                    })
+                })
+
+                await cacheEntryRemoved
+            }
+        }),
+        getLastMessage: builder.query({
+            query: ({fromUserId, toUserId}) => `/get-last-message/${fromUserId}/${toUserId}`,
+            async onCacheEntryAdded(arg, {updateCachedData, cacheDataLoaded, cacheEntryRemoved}) {
+
+                await cacheDataLoaded
+
+                socket.on('add message', message => {
+                    if (message.fromUserId === arg.toUserId) {
+                        updateCachedData(draft => {
+                            draft.data.fromUserId = arg.toUserId
+                            draft.data.toUserId = arg.fromUserId
+                            draft.data.message = message.message
+                        })
+                    }
+                })
+
+                await cacheEntryRemoved
+            }
         }),
         sendMessage: builder.mutation({
             query: ({fromUserId, toUserId, message}) => ({
-                url: `send-message`,
+                url: `/send-message`,
                 method: 'POST',
                 body: {
                     fromUserId,
@@ -27,12 +63,14 @@ export const chatsAPI = createApi({
                     message
                 }
             })
-        })
+        }),
+
     }),
 })
 
 export const {
     useGetChatsQuery,
     useGetChatQuery,
+    useGetLastMessageQuery,
     useSendMessageMutation
-} = chatsAPI
+} = apiChats

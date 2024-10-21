@@ -1,9 +1,11 @@
 import {useParams} from "react-router-dom"
-import {useGetChatQuery} from 'shared/api/chatsAPI'
+import {useSelector} from "react-redux"
 
+import {useGetChatQuery} from 'shared/api/chatsAPI'
 import ChatUser from 'entities/chatUser'
 import ChatOutput from 'features/chatOutput'
 import ChatInput from "features/chatInput"
+
 
 import './Chat.css'
 
@@ -21,9 +23,16 @@ const Chat = () => {
     if (!chatUserId) {
         chatUserId = null
     }
-    const { data } = useGetChatQuery({fromUserId: 15, toUserId: chatUserId})
-    if (data && 'user' in data) user = data.user
-    if (data && 'messages' in data) messages = data.messages
+
+    const currentUser = useSelector(state => state.currentUser)
+
+    const { data } = useGetChatQuery({fromUserId: currentUser.id, toUserId: chatUserId})
+    if (data && 'user' in data.data) user = data.data.user
+    if (data && 'messages' in data.data) messages = data.data.messages
+
+    const showChatOutput = () => {
+        if (chatUserId) return <ChatInput toUserId={chatUserId}/>
+    }
 
     return (
         <div className="chat">
@@ -34,7 +43,7 @@ const Chat = () => {
                 imageWidthSize={48}
             />
             <ChatOutput messagesData={messages} />
-            <ChatInput toUserId={chatUserId}/>
+            {showChatOutput()}
         </div>
     )
 }

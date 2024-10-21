@@ -1,3 +1,3 @@
-import MiniProfileButton from "./ui/miniProfileButton";
+import MiniProfileButton from "./ui/MiniProfileButton.jsx";
 
 export default MiniProfileButton

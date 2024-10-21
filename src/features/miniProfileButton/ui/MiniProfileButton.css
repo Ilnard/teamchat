@@ -1,3 +1,6 @@
+.dropdown-wrapper {
+    position: relative;
+}
 .mini-profile-button {
     display: flex;
     align-items: center;

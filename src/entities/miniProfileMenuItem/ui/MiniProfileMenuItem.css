@@ -1,0 +1,12 @@
+.dropdown-item__container {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    min-width: 200px;
+    padding: 5px;
+    border-radius: 10px;
+    transition: background-color .1s;
+}
+.dropdown-item__container:hover {
+    background-color: var(--bg-hover-el);
+}

@@ -31,7 +31,7 @@ input:focus {
     border-radius: var(--border-radius-interface-component);
     padding: var(--padding-interface-component);
 }
-.logo path {
+.logo path, .c-accent {
     fill: var(--color-accent);
 }
 .logo path:last-child {

@@ -1,0 +1,16 @@
+.notification {
+    min-width: 300px;
+    max-width: 400px;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+.notification-error {
+    margin-bottom: 10px;
+}
+.notification-errors {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    list-style-type: none;
+}

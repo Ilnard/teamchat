@@ -13,5 +13,14 @@ export default defineConfig({
       entities: '/src/entities',
       shared: '/src/shared'
     }
+  },
+  server: {
+    proxy: {
+      '/server': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/server/, '')
+      }
+    }
   }
 })

@@ -1,11 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { chatsAPI } from 'shared/api/chatsAPI'
+import { apiChats } from 'shared/api/chatsAPI'
+import { apiAuth } from 'shared/api/authAPI'
+import currentUserReducer from 'app/userSlice'
 
 const store =  configureStore({
     reducer: {
-        [chatsAPI.reducerPath]: chatsAPI.reducer
+        [apiChats.reducerPath]: apiChats.reducer,
+        [apiAuth.reducerPath]: apiAuth.reducer,
+        currentUser: currentUserReducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(chatsAPI.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiChats.middleware).concat(apiAuth.middleware)
 })
-
 export { store }

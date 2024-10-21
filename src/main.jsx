@@ -7,6 +7,7 @@ import { store } from 'app/store'
 
 import './index.css'
 import './theme.css'
+import './sign.css'
 
 createRoot(document.getElementById('root')).render(
 <Provider store={store}>

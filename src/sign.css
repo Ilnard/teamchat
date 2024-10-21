@@ -1,0 +1,87 @@
+.sign-bg-elem {
+    position: absolute;
+    z-index: -1;
+}
+.sign-bg-elem.top {
+    left: 0;
+    top: 0;
+}
+.sign-bg-elem.bottom {
+    right: 0;
+    bottom: 0;
+}
+.sign-bg-elem > path {
+    fill: transparent;
+    stroke: var(--color-accent);
+    transition: fill .2s, stroke .2s;
+}
+.sign-bg-elem.active > path {
+    fill: var(--color-accent);
+}
+.sign-form {
+    width: 100vw;
+    overflow: hidden;
+}
+.sign-form__slides {
+    display: flex;
+    overflow: hidden;
+    height: 100dvh;
+    position: relative;
+    transition: transform .2s;
+}
+.sign-form-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100dvh;
+    font-size: 56px;
+}
+.sign-form__tip {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.sign-form__input-field {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.sign-form__example {
+    text-align: right;
+}
+.sign-form__input {
+    font-size: 56px;
+    background-color: transparent;
+}
+.sign-form__buttons {
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+    margin-top: 130px;
+}
+.sign-form__btn {
+    width: 260px;
+    height: 80px;
+    border-radius: var(--border-radius);
+    font-size: 24px;
+    background-color: white;
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
+
+    transition: background-color .1s;
+}
+.sign-form__btn.primary {
+    color: white;
+    background-color: var(--color-accent);
+}
+.sign-form__btn.primary:hover {
+    background-color: var(--color-accent-hover);
+}
+.sign-form__btn.primary:active {
+    background-color: var(--color-accent-active);
+}
+.sign-form__reg-tip {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+}

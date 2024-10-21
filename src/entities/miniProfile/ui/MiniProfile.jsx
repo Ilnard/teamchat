@@ -5,8 +5,7 @@ import './MiniProfile.css'
 
 const MiniProfile = ({userName, userSurname, imageURL, imageAlt, imageWidthSize}) => {
 
-    userName = userName ? userName : 'Имя'
-    userSurname = userSurname ? userSurname : 'Фамилия'
+    userName = userName ? userName : 'unknown'
 
     return (
         <div className='mini-profile'>

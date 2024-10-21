@@ -1,3 +1,4 @@
+import {useEffect, useState} from "react"
 import PropTypes from 'prop-types'
 import {NavLink} from "react-router-dom"
 
@@ -5,11 +6,17 @@ import {NavLink} from "react-router-dom"
 
 import './Sidebar.css'
 
-const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItemsSpace = 10}) => {
+const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = {}, navItemsSpace = 10}) => {
 
     if (!NavItemComponent) throw new Error("Sidebar hasn't entity for list")
 
-    const navLinks = navItemsData.map(item => {
+    const [items, setItems] = useState([])
+    useEffect(() => {
+        navItemsData.data ? setItems(navItemsData.data) : setItems([])
+
+    }, [navItemsData.data])
+
+    const navItems = items.map(item => {
         return (
             <li key={item.id}>
                 <NavLink
@@ -25,6 +32,12 @@ const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItem
         )
     })
 
+    const outputNavItems = () => {
+        if (navItemsData.status === false) {
+            return 'Что-то пошло не так...'
+        } else return navItems
+    }
+
     return (
         <div className="sidebar-wrapper">
             <div className='interface-component sidebar'>
@@ -32,7 +45,7 @@ const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItem
                     <ul
                         className='sidebar-list'
                         style={{rowGap: navItemsSpace + 'px'}}
-                    >{navLinks}</ul>
+                    >{outputNavItems()}</ul>
                 </nav>
             </div>
         </div>
@@ -41,7 +54,7 @@ const Sidebar = ({navItemComponent: NavItemComponent, navItemsData = [], navItem
 
 Sidebar.propTypes = {
     navItemComponent: PropTypes.func,
-    navItemsData: PropTypes.array,
+    navItemsData: PropTypes.object,
     navItemsSpace: PropTypes.number
 }
 
